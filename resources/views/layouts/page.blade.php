@@ -2,6 +2,7 @@
 @section('body')
     <nav class="navbar navbar-dark bg-dark">
         <a class="navbar-brand" href="/" style="margin-left: 10px;">LINKBREAKER</a>
+        <a class="nav-link" href="/stat/all" style="color: white">Statistic</a>
     </nav>
 
     <div class="">
