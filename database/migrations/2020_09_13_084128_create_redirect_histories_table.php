@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateShortLinksTable extends Migration
+class CreateRedirectHistoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateShortLinksTable extends Migration
      */
     public function up()
     {
-        Schema::create('short_links', function (Blueprint $table) {
+        Schema::create('redirect_histories', function (Blueprint $table) {
             $table->id();
-            $table->text('original');
-            $table->string('short')->unique();
-            $table->string('info_link')->unique();
-            $table->timestamp('expiry_date')->nullable();
-            $table->boolean('is_commercial')->default(false);
+            $table->string('user_ip');
+            $table->bigInteger('short_link_id')->unsigned();
+            $table->foreign('short_link_id')->on('short_links')->references('id');
+            $table->string('img')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class CreateShortLinksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('short_links');
+        Schema::dropIfExists('redirect_histories');
     }
 }

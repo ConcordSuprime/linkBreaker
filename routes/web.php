@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'MainController@index')->name('main');
-Route::get('/{link}/info', 'MainController@showInfoShortLink')->name('info');
-
+Route::get('/statistic/{link}', 'MainController@showInfoShortLink')->name('info');
+Route::get('/stat/all', 'MainController@showStatisticAllLink')->name('statistic');
+Route::get('/{link}', 'MainController@shortLinkRedirect')->name('redirect-link');
 Route::post('/create-short-link', 'MainController@createShortLink')->name('create-short-link');

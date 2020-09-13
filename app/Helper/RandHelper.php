@@ -30,4 +30,29 @@ class RandHelper
 
         return $random_string;
     }
+
+    /** Return random image from directory
+     *
+     * @param string $directory
+     * @return string
+     */
+    public static function getRandomPicture($directory = "imgs"){
+
+        $imgsArray = [] ;
+
+        if (is_dir($directory)){  // Проверяем действительно ли переменная содержит путь к папке
+            if($openDirectory = opendir($directory)){ // Открываем папку
+                while(($file = readdir($openDirectory)) !== false){ // Проверяем все файлы что находятся в папке
+                    if(strtolower(strstr($file, "."))===".jpg" || strtolower(strstr($file, "."))===".gif" || strtolower(strstr($file, "."))===".png"){ // Выделяем с всех файлов только изображения. Как правило это файлы с расширением: .jpg, .gif, .png
+                        array_push($imgsArray, $file); // Если файл действительно имеет расширение изображения добавляем его в массив
+                    }
+                }
+                closedir($openDirectory); // Закрываем папку
+            }
+        }
+
+        $randomImg = $imgsArray[rand(0, count($imgsArray)-1)];
+
+        return $directory.'/'.$randomImg;
+    }
 }

@@ -20,7 +20,7 @@ class ShortLink extends Model
      * @var array
      */
     protected $fillable = [
-        'original', 'short', 'is_commercial','expiry_date','created_at','info-link'
+        'original', 'short', 'is_commercial','expiry_date','created_at','info_link'
     ];
 
     /**
@@ -66,7 +66,7 @@ class ShortLink extends Model
         $this->create([
             'original' => $originalLink,
             'short' => $newShortLinkName,
-            'info-link' => $linkInfo,
+            'info_link' => $linkInfo,
             'expiry_date' =>$expiry_date,
             'is_commercial' => $is_commercial,
         ]);
@@ -92,6 +92,26 @@ class ShortLink extends Model
      */
     public static function checkForLinkInfoExist($newShortLink){
 
-        return  ShortLink::where('info-link',$newShortLink)->first() != null ? true : false;
+        return  ShortLink::where('info_link',$newShortLink)->first() != null ? true : false;
+    }
+
+    public function redirectHistories(){
+
+        return $this->hasMany(RedirectHistory::class);
+    }
+
+    /** short link with domain
+     * @return string
+     */
+    public function shortLink(){
+        return config('app.url').'/'.$this->short;
+    }
+
+
+    /** info link with domain
+     * @return string
+     */
+    public function infoLink(){
+        return config('app.url').'/statistic/'.$this->info_link;
     }
 }
