@@ -41,8 +41,12 @@ class ShortLink extends Model
         'expiry_date' => 'datetime',
     ];
 
-    /**
+    /** Generate short link
+     *
+     * @param $originalLink
      * @param null $custom_link
+     * @param $expiry_date
+     * @param bool $is_commercial
      * @return array
      */
     public function generateShortLink($originalLink,$custom_link = null,$expiry_date,$is_commercial = false){

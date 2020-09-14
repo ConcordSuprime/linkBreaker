@@ -20,6 +20,11 @@ use PhpParser\Builder;
 
 class MainController extends Controller
 {
+
+    /** Show main page
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(){
 
         $currentDate = date( 'Y-m-d',strtotime(Carbon::now()->addMonth()));
@@ -29,6 +34,11 @@ class MainController extends Controller
         ]);
     }
 
+    /** create Short link
+     *
+     * @param CreateShortLink $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function createShortLink(CreateShortLink $request){
 
         $shortLinkModel = new ShortLink;
@@ -45,6 +55,10 @@ class MainController extends Controller
         return redirect()->route('info',$newLink['info']);
     }
 
+    /** info and statistic for short link
+     * @param $link
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showInfoShortLink($link){
 
         $shortLink = ShortLink::where('info_link',$link)
@@ -66,6 +80,12 @@ class MainController extends Controller
         ]);
     }
 
+    /** redirect TO
+     *
+     * @param Request $request
+     * @param $link
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function shortLinkRedirect(Request $request,$link){
 
         $shortLink = ShortLink::where('short',$link)->first();
@@ -100,6 +120,10 @@ class MainController extends Controller
 
     }
 
+    /** Show statistic
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showStatisticAllLink(){
 
         $links = RedirectHistory::statistic();

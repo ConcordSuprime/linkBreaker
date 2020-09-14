@@ -33,6 +33,10 @@ class RedirectHistory extends Model
         return  date('d.m.Y (H:i)',strtotime(\Carbon\Carbon::parse($this->created_at)->addHours(3)));
     }
 
+    /** get statistic for 2 week
+     * @param int $lastWeeks
+     * @return array
+     */
     public static function statistic($lastWeeks = 2){
 
         $linksArr = [];

@@ -14,7 +14,7 @@ use App\Models\ShortLink;
 
 class CustomLinkValidator
 {
-    /**
+    /** check for link existence
      * @param $field
      * @param $value
      * @param $param
@@ -27,11 +27,27 @@ class CustomLinkValidator
 
     }
 
+    /**  Check link for uniqueness
+     *
+     * @param $field
+     * @param $value
+     * @param $param
+     * @param $validator
+     * @return bool
+     */
     public function uniqueNameLink($field, $value, $param, $validator){
 
         return !(ShortLink::checkForLinkExist($value));
     }
 
+    /** Validate format custom text link
+     *
+     * @param $field
+     * @param $value
+     * @param $param
+     * @param $validator
+     * @return bool
+     */
     public function validCustomLink($field, $value, $param, $validator){
 
         if($value && $value !=null){
