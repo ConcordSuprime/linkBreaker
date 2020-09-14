@@ -31,4 +31,17 @@ class CustomLinkValidator
 
         return !(ShortLink::checkForLinkExist($value));
     }
+
+    public function validCustomLink($field, $value, $param, $validator){
+
+        if($value && $value !=null){
+            preg_match ('/[a-zA-Z0-9]*/i',$value,$ss);
+            if(strlen($ss[0]) != strlen($value)){
+                return false;
+            }
+        }
+
+        return true;
+
+    }
 }

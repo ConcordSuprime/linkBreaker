@@ -14,8 +14,10 @@ class ValidatorServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Validator::extend('valid_custom_link', 'App\Validators\CustomLinkValidator@validCustomLink', 'Неверный формат Своей ссылки.');
         Validator::extend('valid_link', 'App\Validators\CustomLinkValidator@validLink', 'Целевая ссылка не действительна.');
         Validator::extend('unique_name_link', 'App\Validators\CustomLinkValidator@uniqueNameLink', 'Ссылка с таким названием уже существует.');
+
     }
 
 
